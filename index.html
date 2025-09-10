@@ -362,6 +362,8 @@
   <script>
     const bgs = document.querySelectorAll('.bg');
     const panels = document.querySelectorAll('.panel');
+    const mastheadTitle = document.querySelector('.masthead-title');
+    const secondPanel   = panels[1]; // "My mission"
     const crumb = document.querySelector('.crumb');
 
     // IntersectionObserver: reveal cards, swap backgrounds, update crumb
@@ -478,6 +480,15 @@
         if (i === active) btns[i].classList.add('active');
         else btns[i].classList.remove('active');
       });
+        // Keep masthead down once we pass halfway into the 2nd panel
+        if (mastheadTitle && secondPanel) {
+          const triggerY = secondPanel.offsetTop - (window.innerHeight * 0.5);
+          if (window.scrollY >= triggerY) {
+            mastheadTitle.classList.add('show');
+          } else {
+            mastheadTitle.classList.remove('show');
+          }
+        }
     }
 
     function onScroll(){
@@ -490,24 +501,7 @@
     window.addEventListener('scroll', onScroll, { passive:true });
     window.addEventListener('resize', onScroll);
     onScroll(); // init once
-// Reveal masthead title when the 2nd panel hits ~50% of the viewport
-    const mastheadTitle = document.querySelector('.masthead-title');
-    const secondPanel = panels[1]; // your "My mission" section
 
-    if (mastheadTitle && secondPanel) {
-      const titleIO = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          // When at least half the second panel is within viewport, show the title
-          if (entry.isIntersecting) {
-            mastheadTitle.classList.add('show');
-          } else {
-            mastheadTitle.classList.remove('show');
-          }
-        });
-      }, { threshold: 0.5 });
-
-      titleIO.observe(secondPanel);
-    }
   </script>
 </body>
 </html>
