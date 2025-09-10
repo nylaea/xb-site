@@ -205,44 +205,44 @@
     }
     /* Sticky footer that swoops up on last section styled like crumb */
     .site-footer {
-      position: fixed;
-      bottom: 18px;
-      left: 50%;
-      transform: translateX(-50%) translateY(140%); /* hidden by default */
-      z-index: 65;
+    position: fixed;
+    bottom: 18px;
+    left: 50%;
+    transform: translateX(-50%) translateY(140%); /* hidden by default */
+    z-index: 65;
 
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.08);
-      color: #fff;
-      font: 600 13px/1.1 var(--font);
-      letter-spacing: .2px;
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-      border: 1px solid rgba(255,255,255,.12);
+    padding: 8px 12px;
+    border-radius: 999px;
+    background: rgba(255,255,255,.08);
+    color: #fff;
+    font: 600 13px/1.1 var(--font);
+    letter-spacing: .2px;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border: 1px solid rgba(255,255,255,.12);
 
+    opacity: 0;
+    transition: transform 320ms ease, opacity 320ms ease;
+  }
+
+.site-footer.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+
+      /* start hidden: below viewport */
+      transform: translateY(140%);
       opacity: 0;
       transition: transform 320ms ease, opacity 320ms ease;
     }
-
-    .site-footer.show {
-      transform: translateX(-50%) translateY(0);
+    .site-footer.show{
+      transform: translateY(0);
       opacity: 1;
+    }
 
-          /* start hidden: below viewport */
-          transform: translateY(140%);
-          opacity: 0;
-          transition: transform 320ms ease, opacity 320ms ease;
-        }
-        .site-footer.show{
-          transform: translateY(0);
-          opacity: 1;
-        }
-
-        @media (prefers-reduced-motion:reduce){
-          .bg{transition:none}
-          .card{transition:none}
-        }
+    @media (prefers-reduced-motion:reduce){
+      .bg{transition:none}
+      .card{transition:none}
+    }
 
     /* ---------- Scroll-reactive polish ---------- */
 
