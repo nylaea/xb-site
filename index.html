@@ -4,14 +4,107 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>XERA Beauty</title>
-  <link rel="stylesheet" href="styles.css" />
+
+  <!-- INLINE CSS so we bypass any external file issues -->
+  <style>
+    /* Reset */
+    *{box-sizing:border-box}
+    html,body{margin:0;height:100%}
+    :root{
+      --radius:20px;
+      --shadow:0 10px 40px rgba(0,0,0,.35);
+      --font:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+    }
+
+    /* Background stack */
+    .bg-stack{position:fixed;inset:0;z-index:-1;overflow:hidden;background:#000}
+    .bg{position:absolute;inset:0;opacity:0;transition:opacity 700ms ease;
+        background-size:cover;background-position:center;filter:contrast(1.06) saturate(1.05)}
+    .bg.show{opacity:1}
+
+    /* Modern gradients: mostly color, small black pocket top-left */
+    .v1{
+      background-image:
+        radial-gradient(420px 320px at 0% 0%, rgba(0,0,0,.55) 0%, rgba(0,0,0,.25) 18%, rgba(0,0,0,0) 36%),
+        linear-gradient(135deg, #1a1a1d 0%, #5f5cf1 55%, #7f7cff 100%);
+    }
+    .v2{
+      background-image:
+        radial-gradient(420px 320px at 0% 0%, rgba(0,0,0,.55) 0%, rgba(0,0,0,.25) 18%, rgba(0,0,0,0) 36%),
+        linear-gradient(135deg, #141218 0%, #6a00ff 55%, #8f5cff 100%);
+    }
+    .v3{
+      background-image:
+        radial-gradient(420px 320px at 0% 0%, rgba(0,0,0,.55) 0%, rgba(0,0,0,.25) 18%, rgba(0,0,0,0) 36%),
+        linear-gradient(135deg, #10161a 0%, #00bcd4 55%, #33d0e4 100%);
+    }
+    .v4{
+      background-image:
+        radial-gradient(420px 320px at 0% 0%, rgba(0,0,0,.55) 0%, rgba(0,0,0,.25) 18%, rgba(0,0,0,0) 36%),
+        linear-gradient(135deg, #171015 0%, #ff006e 55%, #ff4fa3 100%);
+    }
+    .v5{
+      background-image:
+        radial-gradient(420px 320px at 0% 0%, rgba(0,0,0,.55) 0%, rgba(0,0,0,.25) 18%, rgba(0,0,0,0) 36%),
+        linear-gradient(135deg, #171409 0%, #ffd60a 55%, #ffe36b 100%);
+    }
+
+    /* Section label */
+    .crumb{
+      position:fixed;top:18px;right:18px;z-index:50;
+      padding:8px 12px;border-radius:999px;
+      background:rgba(255,255,255,.08);
+      color:#fff;font:600 13px/1.1 var(--font);
+      letter-spacing:.2px;backdrop-filter:blur(6px);
+      border:1px solid rgba(255,255,255,.12)
+    }
+
+    /* Panels over background */
+    main{display:block}
+    .panel{
+      min-height:100svh;display:grid;place-items:center;
+      padding:clamp(18px,4vw,48px)
+    }
+
+    /* Frosted glass card */
+    .card{
+      width:min(92vw,860px);
+      color:#fff;text-align:center;
+      padding:clamp(20px,4vw,44px);
+      border-radius:var(--radius);
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(10px);
+      transform:translateY(18px);opacity:.001;
+      transition:transform 500ms ease,opacity 500ms ease
+    }
+    .card.reveal{transform:translateY(0);opacity:1}
+
+    /* Type */
+    h1,h2{margin:0 0 12px 0;line-height:1.06}
+    h1{font:700 clamp(34px,7vw,72px)/1 var(--font)}
+    h2{font:700 clamp(26px,4.2vw,40px)/1.08 var(--font)}
+    p,li{font:400 clamp(16px,2.1vw,18px)/1.6 var(--font);color:#f0f0f3}
+    ul{max-width:720px;margin:0 auto;padding-left:18px;text-align:left}
+    li+li{margin-top:8px}
+
+    .actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:12px}
+    .cta{background:#fff;color:#000;text-decoration:none;padding:12px 18px;border-radius:999px;font-weight:700}
+    .ghost{color:#fff;text-decoration:none;padding:12px 18px;border-radius:999px;border:1px solid rgba(255,255,255,.35)}
+    .cta:hover,.ghost:hover{filter:brightness(1.05)}
+
+    @media (prefers-reduced-motion:reduce){
+      .bg{transition:none}
+      .card{transition:none}
+    }
+  </style>
 </head>
 <body>
 
-  <!-- Section label (updates on scroll) -->
   <div class="crumb" aria-live="polite">Intro</div>
 
-  <!-- Background stack (one is shown at a time) -->
+  <!-- Backgrounds -->
   <div class="bg-stack">
     <div class="bg v1 show"></div>
     <div class="bg v2"></div>
@@ -20,7 +113,7 @@
     <div class="bg v5"></div>
   </div>
 
-  <!-- Panels: centered copy over the backgrounds -->
+  <!-- Centered panels -->
   <main>
 
     <!-- Intro -->
@@ -33,7 +126,7 @@
     </section>
 
     <!-- Mission -->
-    <section class="panel" data-visual="v1" data-crumb="Mission">
+    <section class="panel" data-visual="v1" data-crumb="My mission">
       <div class="card">
         <h2>My mission</h2>
         <p>I started XERA Beauty to create bold, diverse makeup that does more than look good. It heals, nourishes, and empowers. For me, beauty is about expression, authenticity, and accountability.</p>
@@ -41,17 +134,17 @@
     </section>
 
     <!-- Story -->
-    <section class="panel" data-visual="v2" data-crumb="Story">
+    <section class="panel" data-visual="v2" data-crumb="My story">
       <div class="card">
         <h2>My story</h2>
-        <p>I have been a performer and makeup artist for over twenty years, from drag to burlesque to theater. I know firsthand how frustrating it is to choose between skincare that feels good and makeup that lasts under lights, through sweat, and during long nights. That is why I decided to build XERA Beauty and products that deliver both.</p>
+        <p>I have been a performer and makeup artist for over twenty years, from drag to burlesque to theater. I know firsthand how frustrating it is to choose between skincare that feels good and makeup that lasts under lights, through sweat, and during long nights. That is why I decided to build XERA Beauty — products that deliver both.</p>
       </div>
     </section>
 
     <!-- Difference -->
     <section class="panel" data-visual="v3" data-crumb="What is different">
       <div class="card">
-        <h2>What makes XERA different</h2>
+        <h2>What makes XERA Beauty different</h2>
         <ul>
           <li><strong>Performance plus care.</strong> Theater grade longevity that still cares for your skin.</li>
           <li><strong>Inclusive by design.</strong> Built for performers, enthusiasts, and everyday users who are often not represented by mainstream beauty.</li>
@@ -61,7 +154,7 @@
       </div>
     </section>
 
-    <!-- Coming soon -->
+    <!-- Coming Soon -->
     <section class="panel" data-visual="v4" data-crumb="Coming soon">
       <div class="card">
         <h2>LipLore</h2>
@@ -84,6 +177,28 @@
 
   </main>
 
-  <script src="app.js"></script>
+  <!-- JS -->
+  <script>
+    const bgs = document.querySelectorAll('.bg');
+    const panels = document.querySelectorAll('.panel');
+    const crumb = document.querySelector('.crumb');
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+
+        const card = entry.target.querySelector('.card');
+        if (card) card.classList.add('reveal');
+
+        const id = entry.target.dataset.visual;
+        if (id){ bgs.forEach(bg => bg.classList.toggle('show', bg.classList.contains(id))); }
+
+        const label = entry.target.dataset.crumb || '…';
+        crumb.textContent = label;
+      });
+    }, { threshold: 0.66 });
+
+    panels.forEach(p => io.observe(p));
+  </script>
 </body>
 </html>
