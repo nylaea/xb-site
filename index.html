@@ -80,6 +80,20 @@
       transition:transform 500ms ease,opacity 500ms ease
     }
     .card.reveal{transform:translateY(0);opacity:1}
+    /* --- Tinted bubbles per section --- */
+    .card{
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      border: 1px solid rgba(255,255,255,.18);
+      box-shadow: 0 10px 30px rgba(0,0,0,.25);
+      color: #fff;
+      text-shadow: 0 1px 0 rgba(0,0,0,.15);
+    }
+    .panel[data-visual="v1"] .card{ background: rgba(197, 194, 255, 0.75); } /* #c5c2ff */
+    .panel[data-visual="v2"] .card{ background: rgba(216, 184, 255, 0.75); } /* #d8b8ff */
+    .panel[data-visual="v3"] .card{ background: rgba(184, 240, 245, 0.75); } /* #b8f0f5 */
+    .panel[data-visual="v4"] .card{ background: rgba(255, 184, 217, 0.75); } /* #ffb8d9 */
+    .panel[data-visual="v5"] .card{ background: rgba(255, 238, 184, 0.75); } /* #ffeeb8 */
 
     /* Type */
     h1,h2{margin:0 0 12px 0;line-height:1.06}
