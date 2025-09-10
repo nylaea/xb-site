@@ -157,7 +157,28 @@
     .cta{background:#fff;color:#000;text-decoration:none;padding:12px 18px;border-radius:999px;font-weight:700}
     .ghost{color:#fff;text-decoration:none;padding:12px 18px;border-radius:999px;border:1px solid rgba(255,255,255,.35)}
     .cta:hover,.ghost:hover{filter:brightness(1.05)}
-
+    /* Frosted CTA button styled like crumb/social */
+    .frosted-cta {
+      display:inline-grid;
+      place-items:center;
+      padding:12px 28px;
+      border-radius:999px;
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.12);
+      backdrop-filter:blur(6px);
+      -webkit-backdrop-filter:blur(6px);
+      color:#fff;
+      font-weight:600;
+      text-decoration:none;
+      box-shadow:0 6px 18px rgba(0,0,0,.20);
+      transition:transform .15s ease, background .15s ease, border-color .15s ease, box-shadow .15s ease;
+    }
+    .frosted-cta:hover{
+      transform:translateY(-1px);
+      background:rgba(255,255,255,.14);
+      border-color:rgba(255,255,255,.20);
+      box-shadow:0 8px 22px rgba(0,0,0,.24);
+    }
     @media (prefers-reduced-motion:reduce){
       .bg{transition:none}
       .card{transition:none}
@@ -299,10 +320,8 @@
       <div class="card">
         <h2>Join me</h2>
         <p>I am building XERA Beauty step by step. Follow along for behind the scenes, process, and drops. Sign up to be first to know when LipLore goes live.</p>
-        <div class="actions">
+        <div style="margin-top:20px;">
           <a class="cta" href="mailto:info@xerabeauty.com?subject=Join%20the%20list">Join the list</a>
-          <a class="ghost" href="#" aria-label="TikTok">TikTok</a>
-          <a class="ghost" href="#" aria-label="Instagram">Instagram</a>
         </div>
       </div>
     </section>
