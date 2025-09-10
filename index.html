@@ -179,6 +179,31 @@
       border-color:rgba(255,255,255,.20);
       box-shadow:0 8px 22px rgba(0,0,0,.24);
     }
+      /* Floating overall title that drops from top-left */
+    .masthead-title{
+      position: fixed;
+      top: 18px;
+      left: 18px;
+      z-index: 60;
+      /* Match your h1 size exactly */
+      font: 700 clamp(34px, 7vw, 72px)/1 var(--font);
+      color: #fff;
+      text-shadow: 0 2px 18px rgba(0,0,0,.25);
+      letter-spacing: .2px;
+      pointer-events: none;
+
+      /* start hidden above */
+      transform: translateY(-120%);
+      opacity: 0;
+      transition: transform 300ms ease, opacity 300ms ease;
+    }
+
+/* visible state when the second section crosses mid-screen */
+.masthead-title.show{
+  transform: translateY(0);
+  opacity: 1;
+}
+
     @media (prefers-reduced-motion:reduce){
       .bg{transition:none}
       .card{transition:none}
@@ -252,11 +277,16 @@
     </svg>
   </a>
 </div>
+
+
   <!-- NEW: progress bar + dot nav -->
   <div class="progress" aria-hidden="true"><i></i></div>
   <div class="dotnav" aria-label="Section navigation"></div>
 
   <div class="crumb" aria-live="polite">Intro</div>
+
+  <!-- Floating overall title (top-left) -->
+  <div class="masthead-title" aria-hidden="true">XERA Beauty</div>
 
   <!-- Backgrounds -->
   <div class="bg-stack">
@@ -460,6 +490,24 @@
     window.addEventListener('scroll', onScroll, { passive:true });
     window.addEventListener('resize', onScroll);
     onScroll(); // init once
+// Reveal masthead title when the 2nd panel hits ~50% of the viewport
+    const mastheadTitle = document.querySelector('.masthead-title');
+    const secondPanel = panels[1]; // your "My mission" section
+
+    if (mastheadTitle && secondPanel) {
+      const titleIO = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          // When at least half the second panel is within viewport, show the title
+          if (entry.isIntersecting) {
+            mastheadTitle.classList.add('show');
+          } else {
+            mastheadTitle.classList.remove('show');
+          }
+        });
+      }, { threshold: 0.5 });
+
+      titleIO.observe(secondPanel);
+    }
   </script>
 </body>
 </html>
