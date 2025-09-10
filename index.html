@@ -198,11 +198,39 @@
       transition: transform 300ms ease, opacity 300ms ease;
     }
 
-/* visible state when the second section crosses mid-screen */
-.masthead-title.show{
-  transform: translateY(0);
-  opacity: 1;
-}
+    /* visible state when the second section crosses mid-screen */
+    .masthead-title.show{
+      transform: translateY(0);
+      opacity: 1;
+    }
+    /* Sticky footer that swoops up on last section */
+    .site-footer{
+      position: fixed;
+      left: 0; right: 0; bottom: 12px;     /* sits slightly above the bottom edge */
+      z-index: 65;
+      width: 100%;
+      text-align: center;
+      padding: 10px 14px;
+      margin: 0 auto;
+      max-width: 980px;                     /* keeps it neat on ultrawide */
+      border-radius: 999px;                 /* pill, matching crumb/social */
+      background: rgba(0,0,0,0.28);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      color: rgba(255,255,255,0.85);
+      font: 500 14px/1.4 var(--font);
+      border: 1px solid rgba(255,255,255,0.16);
+      box-shadow: 0 8px 28px rgba(0,0,0,.28);
+
+      /* start hidden: below viewport */
+      transform: translateY(140%);
+      opacity: 0;
+      transition: transform 320ms ease, opacity 320ms ease;
+    }
+    .site-footer.show{
+      transform: translateY(0);
+      opacity: 1;
+    }
 
     @media (prefers-reduced-motion:reduce){
       .bg{transition:none}
@@ -365,6 +393,8 @@
     const mastheadTitle = document.querySelector('.masthead-title');
     const secondPanel   = panels[1]; // "My mission"
     const crumb = document.querySelector('.crumb');
+    const footerEl   = document.querySelector('.site-footer');
+    const lastPanel  = panels[panels.length - 1];
 
     // IntersectionObserver: reveal cards, swap backgrounds, update crumb
     const io = new IntersectionObserver((entries) => {
@@ -463,7 +493,15 @@
       bgStack.classList.add('scrolling');
       clearTimeout(updateScrollEffects._t);
       updateScrollEffects._t = setTimeout(()=>bgStack.classList.remove('scrolling'), 120);
-
+      // Show footer when we reach halfway into the last panel
+        if (footerEl && lastPanel) {
+          const lastTriggerY = lastPanel.offsetTop - (window.innerHeight * 0.5);
+          if (window.scrollY >= lastTriggerY) {
+            footerEl.classList.add('show');
+          } else {
+            footerEl.classList.remove('show');
+          }
+        }
       // 3) Per-panel progress for card motion + dot active state
       const btns = dotnavEl.querySelectorAll('button');
       const active = closestPanelIndex();
@@ -503,5 +541,8 @@
     onScroll(); // init once
 
   </script>
+  <footer class="site-footer" aria-hidden="true">
+    © 2025 XERA Beauty. All Rights Reserved. Trademark and Copyright.
+  </footer>
 </body>
 </html>
