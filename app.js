@@ -1,18 +1,27 @@
-// When each text block comes into view, show the matching visual on the left
-const visuals = document.querySelectorAll('.visual');
-const blocks = document.querySelectorAll('.block');
+// Grab elements
+const bgs = document.querySelectorAll('.bg');
+const panels = document.querySelectorAll('.panel');
+const crumb = document.querySelector('.crumb');
 
+// Observe panels to swap background, reveal text, and update the label
 const io = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (!entry.isIntersecting) return;
 
-    // Reveal the text block
-    entry.target.classList.add('reveal');
+    // Reveal card
+    const card = entry.target.querySelector('.card');
+    if (card) card.classList.add('reveal');
 
-    // Find which visual to show
-    const id = entry.target.dataset.visual; // e.g., "v3"
-    visuals.forEach(v => v.classList.toggle('show', v.classList.contains(id)));
+    // Swap background
+    const id = entry.target.dataset.visual; // v1..v5
+    if (id){
+      bgs.forEach(bg => bg.classList.toggle('show', bg.classList.contains(id)));
+    }
+
+    // Update section label
+    const label = entry.target.dataset.crumb || '…';
+    crumb.textContent = label;
   });
-}, { threshold: 0.6 });
+}, { threshold: 0.66 });
 
-blocks.forEach(b => io.observe(b));
+panels.forEach(p => io.observe(p));

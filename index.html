@@ -2,68 +2,87 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>XERA Beauty</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
-  <div class="stage">
-    <!-- Left: sticky visuals that change as you scroll -->
-    <div class="stage-visual">
-      <div class="visual v1 show" aria-hidden="true"></div>
-      <div class="visual v2" aria-hidden="true"></div>
-      <div class="visual v3" aria-hidden="true"></div>
-      <div class="visual v4" aria-hidden="true"></div>
-      <div class="visual v5" aria-hidden="true"></div>
-    </div>
+  <!-- Section label (updates on scroll) -->
+  <div class="crumb" aria-live="polite">Intro</div>
 
-    <!-- Right: scroll blocks with your full messaging -->
-    <div class="stage-copy">
+  <!-- Background stack (one is shown at a time) -->
+  <div class="bg-stack">
+    <div class="bg v1 show"></div>
+    <div class="bg v2"></div>
+    <div class="bg v3"></div>
+    <div class="bg v4"></div>
+    <div class="bg v5"></div>
+  </div>
 
-      <!-- My Mission -->
-      <section class="block" data-visual="v1">
-        <h1>My mission</h1>
+  <!-- Panels: centered copy over the backgrounds -->
+  <main>
+
+    <!-- Intro -->
+    <section class="panel" data-visual="v1" data-crumb="Intro">
+      <div class="card">
+        <h1 class="brand">XERA Beauty</h1>
+        <p class="lede">Bold, diverse makeup that heals, nourishes, and empowers.</p>
+        <p class="hint">Scroll</p>
+      </div>
+    </section>
+
+    <!-- Mission -->
+    <section class="panel" data-visual="v1" data-crumb="Mission">
+      <div class="card">
+        <h2>My mission</h2>
         <p>I started XERA Beauty to create bold, diverse makeup that does more than look good. It heals, nourishes, and empowers. For me, beauty is about expression, authenticity, and accountability.</p>
-      </section>
+      </div>
+    </section>
 
-      <!-- My Story -->
-      <section class="block" data-visual="v2">
+    <!-- Story -->
+    <section class="panel" data-visual="v2" data-crumb="Story">
+      <div class="card">
         <h2>My story</h2>
         <p>I have been a performer and makeup artist for over twenty years, from drag to burlesque to theater. I know firsthand how frustrating it is to choose between skincare that feels good and makeup that lasts under lights, through sweat, and during long nights. That is why I decided to build XERA — products that deliver both.</p>
-      </section>
+      </div>
+    </section>
 
-      <!-- What Makes XERA Different -->
-      <section class="block" data-visual="v3">
+    <!-- Difference -->
+    <section class="panel" data-visual="v3" data-crumb="What is different">
+      <div class="card">
         <h2>What makes XERA different</h2>
         <ul>
-          <li><strong>Performance plus Care:</strong> I formulate with the same standards I need on stage. Theater grade longevity that still cares for your skin.</li>
-          <li><strong>Inclusive by Design:</strong> I am building this brand for people like me — drag queens, performers, makeup enthusiasts, and everyday wearers who often do not see themselves represented in mainstream beauty.</li>
-          <li><strong>Accountability Over Greenwashing:</strong> I do not use the word “sustainable” lightly. My goal is to create refillable systems and packaging that truly work, with honesty and transparency.</li>
-          <li><strong>Fantasy Meets Reality:</strong> My first collection, the Lore Line, is inspired by fantasy creatures. It brings storytelling, artistry, and play into everyday makeup.</li>
+          <li><strong>Performance plus care.</strong> Theater grade longevity that still cares for your skin.</li>
+          <li><strong>Inclusive by design.</strong> Built for performers, enthusiasts, and everyday users who are often not represented by mainstream beauty.</li>
+          <li><strong>Accountability over greenwashing.</strong> A refill vision that aims to work in practice, not just as a slogan.</li>
+          <li><strong>Fantasy meets reality.</strong> The Lore Line brings storytelling, artistry, and play into everyday makeup.</li>
         </ul>
-      </section>
+      </div>
+    </section>
 
-      <!-- Coming Soon -->
-      <section class="block" data-visual="v4">
-        <h2>Coming soon</h2>
-        <p>The first launch will be LipLore, a crystal clear, high shine lip lacquer that is transfer proof, waterproof, and never sticky. I am starting with four shades inspired by fantasy creatures — Dragon’s Blood, Mermaid Tears, Nymph Blessing, and Faerie Dreams.</p>
-      </section>
+    <!-- Coming soon -->
+    <section class="panel" data-visual="v4" data-crumb="Coming soon">
+      <div class="card">
+        <h2>LipLore</h2>
+        <p>A crystal clear, high shine lip lacquer that is transfer proof, waterproof, and never sticky. First shades: Dragon’s Blood, Mermaid Tears, Nymph Blessing, Faerie Dreams.</p>
+      </div>
+    </section>
 
-      <!-- Join Me -->
-      <section class="block" data-visual="v5">
+    <!-- Join -->
+    <section class="panel" data-visual="v5" data-crumb="Join me">
+      <div class="card">
         <h2>Join me</h2>
-        <p>I am building XERA step by step, and I would love for you to be part of it. Follow me on TikTok and Instagram, where I share behind the scenes looks, my creative process, and upcoming drops. Sign up for the mailing list to be the first to know when LipLore goes live.</p>
-        <!-- Simple actions you can swap later -->
-        <div style="display:flex; gap:12px; flex-wrap:wrap;">
+        <p>I am building XERA step by step. Follow along for behind the scenes, process, and drops. Sign up to be first to know when LipLore goes live.</p>
+        <div class="actions">
           <a class="cta" href="mailto:info@xerabeauty.com?subject=Join%20the%20list">Join the list</a>
-          <a class="cta" href="#" aria-label="TikTok">TikTok</a>
-          <a class="cta" href="#" aria-label="Instagram">Instagram</a>
+          <a class="ghost" href="#" aria-label="TikTok">TikTok</a>
+          <a class="ghost" href="#" aria-label="Instagram">Instagram</a>
         </div>
-      </section>
+      </div>
+    </section>
 
-    </div>
-  </div>
+  </main>
 
   <script src="app.js"></script>
 </body>

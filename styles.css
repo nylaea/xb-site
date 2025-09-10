@@ -1,96 +1,115 @@
-/* Base */
+/* Reset-ish */
 * { box-sizing: border-box; }
-html, body { margin: 0; padding: 0; }
-body {
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  color: #111;
-  background: #0b0b0b; /* subtle dark around the edges */
+html, body { height: 100%; margin: 0; }
+:root{
+  --ink:#0e0e0f;
+  --paper:#f6f6f7;
+  --muted:#6c6c73;
+  --accent:#0b0b0c;
+  --radius:20px;
+  --shadow: 0 10px 40px rgba(0,0,0,.35);
 }
 
-/* Two-column stage */
-.stage {
-  display: grid;
-  grid-template-columns: minmax(320px, 48vw) 1fr;
-  min-height: 100vh;
-}
-
-/* Left: sticky visuals */
-.stage-visual {
-  position: sticky;
-  top: 0;
-  height: 100vh;
+/* Background stack */
+.bg-stack{
+  position: fixed;
+  inset: 0;
+  z-index: -1;
   overflow: hidden;
   background: #000;
 }
-
-/* Visual layers (we switch which one is visible) */
-.visual {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  transition: opacity 600ms ease;
-  background-size: cover;
-  background-position: center;
-  filter: contrast(1.05) saturate(1.05);
+.bg{
+  position:absolute; inset:0;
+  opacity:0; transition:opacity 700ms ease;
+  background-size: cover; background-position: center;
+  filter: contrast(1.08) saturate(1.05);
 }
-.visual.show { opacity: 1; }
+.bg.show{ opacity:1; }
 
-/* Placeholder looks (you can replace with real images later) */
-.v1 { background-image: radial-gradient(1200px 600px at 40% 60%, #2b2b2b, #000); }
-.v2 { background-image: linear-gradient(135deg, #0a0a0a, #1e1e1e 40%, #6a00ff); }
-.v3 { background-image: linear-gradient(135deg, #0a0a0a, #1e1e1e 40%, #00bcd4); }
-.v4 { background-image: linear-gradient(135deg, #0a0a0a, #1e1e1e 40%, #ff006e); }
-.v5 { background-image: linear-gradient(135deg, #0a0a0a, #1e1e1e 40%, #ffd60a); }
-
-/* If you have real images, set like this:
-.v1 { background-image: url('assets/images/liplore.jpg'); }
+/* Gradient placeholders (swap to real images anytime) */
+.v1{ background-image: radial-gradient(900px 600px at 50% 60%, #1a1a1a, #000); }
+.v2{ background-image: linear-gradient(135deg, #0a0a0a 0%, #1b1b1f 45%, #6a00ff 100%); }
+.v3{ background-image: linear-gradient(135deg, #0a0a0a 0%, #192026 45%, #00bcd4 100%); }
+.v4{ background-image: linear-gradient(135deg, #0a0a0a 0%, #24131a 45%, #ff006e 100%); }
+.v5{ background-image: linear-gradient(135deg, #0a0a0a 0%, #2f2814 45%, #ffd60a 100%); }
+/* Example if you have photos:
+.v3{ background-image:url('assets/images/lore-shot.jpg'); }
 */
 
-/* Right: scrollable copy */
-.stage-copy {
-  background: #fafafa;
+/* Section label */
+.crumb{
+  position: fixed; top: 18px; right: 18px; z-index: 50;
+  padding: 8px 12px; border-radius: 999px;
+  background: rgba(255,255,255,.08);
+  color: #fff; font: 600 13px/1.1 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  letter-spacing: .2px; backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,.1);
 }
 
-/* Each content block */
-.block {
-  min-height: 100vh;
-  display: grid;
-  align-content: center;
-  padding: clamp(24px, 5vw, 64px);
-  gap: 16px;
+/* Panels */
+main{ display:block; }
+.panel{
+  min-height: 100svh; /* full viewport incl. mobile UI */
+  display:grid; place-items:center;
+  padding: clamp(18px, 4vw, 48px);
 }
 
-/* Typography */
-h1, h2 {
-  margin: 0 0 8px 0;
-  line-height: 1.1;
-  color: #111;
-}
-h1 { font-size: clamp(32px, 6vw, 56px); }
-h2 { font-size: clamp(26px, 4.2vw, 40px); }
-p, li { font-size: clamp(16px, 2.2vw, 18px); color: #2a2a2a; }
-ul { margin: 0; padding-left: 20px; }
-
-/* Simple reveal animation for text */
-.block { opacity: 0.001; transform: translateY(20px); transition: 500ms ease; }
-.block.reveal { opacity: 1; transform: translateY(0); }
-
-/* Call to action */
-a.cta {
-  display: inline-block;
-  margin-top: 12px;
-  padding: 12px 18px;
-  border-radius: 999px;
-  background: #111;
+/* Frosted card with centered copy */
+.card{
+  max-width: 860px;
+  width: min(92vw, 860px);
   color: #fff;
-  text-decoration: none;
-  font-weight: 600;
+  text-align: center;
+  padding: clamp(20px, 4vw, 44px);
+  border-radius: var(--radius);
+  background: rgba(255,255,255,.06);
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(255,255,255,.1);
+  backdrop-filter: blur(10px);
+  transform: translateY(18px);
+  opacity: .001;
+  transition: transform 500ms ease, opacity 500ms ease;
 }
-a.cta:hover { filter: brightness(1.1); }
+.card.reveal{ transform: translateY(0); opacity: 1; }
 
-/* Mobile */
-@media (max-width: 900px) {
-  .stage { grid-template-columns: 1fr; }
-  .stage-visual { height: 60vh; position: relative; }
-  .block { min-height: auto; padding-block: 56px; }
+.brand{
+  font-size: clamp(34px, 7vw, 72px);
+  line-height: 1.02;
+  margin: 0 0 10px 0;
+}
+.lede{
+  font-size: clamp(18px, 2.4vw, 22px);
+  color: #e8e8ea; margin: 0 0 10px 0;
+}
+.hint{ color:#cfcfd6; opacity:.75; margin: 6px 0 0 0; }
+
+/* Type */
+h2{
+  margin: 0 0 10px 0;
+  font-size: clamp(26px, 4.2vw, 40px);
+  line-height: 1.1; color: #fff;
+}
+p, li{
+  color:#e8e8ea;
+  font-size: clamp(16px, 2.1vw, 18px);
+}
+ul{ text-align: left; max-width: 720px; margin: 0 auto; padding-left: 18px; }
+li + li{ margin-top: 8px; }
+
+/* Buttons */
+.actions{ display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top: 12px; }
+.cta{
+  background:#fff; color:#000; text-decoration:none;
+  padding:12px 18px; border-radius:999px; font-weight:700;
+}
+.ghost{
+  color:#fff; text-decoration:none; padding:12px 18px;
+  border-radius:999px; border:1px solid rgba(255,255,255,.35);
+}
+.cta:hover,.ghost:hover{ filter:brightness(1.05); }
+
+/* Motion safety */
+@media (prefers-reduced-motion: reduce){
+  .bg{ transition:none; }
+  .card{ transition:none; }
 }
