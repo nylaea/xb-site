@@ -1,55 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>XERA Beauty</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      text-align: center;
-      background: #fafafa;
-      color: #333;
-    }
-    header {
-      background: black;
-      color: white;
-      padding: 2rem;
-    }
-    h1 {
-      margin: 0;
-    }
-    section {
-      padding: 2rem;
-    }
-    footer {
-      background: #111;
-      color: #aaa;
-      padding: 1rem;
-      font-size: 0.9rem;
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header>
-    <h1>XERA Beauty</h1>
-    <p>Coming Soon ✨</p>
-  </header>
 
-  <section>
-    <h2>About</h2>
-    <p>XERA Beauty is building the future of performance-inspired beauty.</p>
-  </section>
+  <div class="stage">
+    <!-- Left side: sticky visuals -->
+    <div class="stage-visual">
+      <div class="visual v1 show" aria-hidden="true"></div>
+      <div class="visual v2" aria-hidden="true"></div>
+      <div class="visual v3" aria-hidden="true"></div>
+      <div class="visual v4" aria-hidden="true"></div>
+      <div class="visual v5" aria-hidden="true"></div>
+    </div>
 
-  <section>
-    <h2>Stay Connected</h2>
-    <p>Email: info@xerabeauty.com</p>
-  </section>
+    <!-- Right side: scroll blocks that trigger the visuals -->
+    <div class="stage-copy">
 
-  <footer>
-    <p>© 2025 XERA Beauty</p>
-  </footer>
+      <section class="block" data-visual="v1">
+        <h1>I started XERA Beauty</h1>
+        <p>I was tired of choosing between makeup that looks good and makeup that feels good.</p>
+      </section>
+
+      <section class="block" data-visual="v2">
+        <h2>My mission</h2>
+        <p>Bold, diverse makeup that heals, nourishes, and empowers.</p>
+      </section>
+
+      <section class="block" data-visual="v3">
+        <h2>My story</h2>
+        <p>I have been a performer and makeup artist for over twenty years. From drag to burlesque to theater, I know what it means to need makeup that lasts under lights and through long nights.</p>
+      </section>
+
+      <section class="block" data-visual="v4">
+        <h2>What makes XERA different</h2>
+        <ul>
+          <li>Performance plus care. Theater grade longevity with real skincare benefits.</li>
+          <li>Inclusive by design. Built for performers, enthusiasts, and everyday users.</li>
+          <li>Accountability over greenwashing. Refillable systems without the fluff.</li>
+          <li>Fantasy meets reality. Storytelling through bold, expressive color.</li>
+        </ul>
+      </section>
+
+      <section class="block" data-visual="v5">
+        <h2>Coming soon</h2>
+        <p>LipLore. A crystal clear, high shine lip lacquer that is transfer proof, waterproof, and never sticky. Shades: Dragon’s Blood, Mermaid Tears, Nymph Blessing, Faerie Dreams.</p>
+        <a class="cta" href="mailto:info@xerabeauty.com?subject=Join%20the%20list">Join the list</a>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="app.js"></script>
 </body>
 </html>
